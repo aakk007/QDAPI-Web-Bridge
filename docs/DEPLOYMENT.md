@@ -14,12 +14,12 @@ mkdir -m 700 qdapi-release
 cd qdapi-release
 ```
 
-从本仓库Releases下载`QDAPI-Web-Bridge-v0.1.14-linux-amd64.tar.gz`和外层`SHA256SUMS.txt`。本轮Web核心仍为0.1.13，仅桥接与来源文档更新。不要从聊天附件或未知镜像获取。对照GitHub发布页/可信渠道的摘要后校验：
+从本仓库Releases下载`QDAPI-Web-Bridge-v0.1.15-linux-amd64.tar.gz`和外层`SHA256SUMS.txt`。本轮Web核心为0.1.15，修复每小时广告冷却调度与随机奖励核验；APP0.1.11及arm64引擎未改变。不要从聊天附件或未知镜像获取。对照GitHub发布页/可信渠道的摘要后校验：
 
 ```bash
 sha256sum --ignore-missing -c SHA256SUMS.txt
-tar -xzf QDAPI-Web-Bridge-v0.1.14-linux-amd64.tar.gz
-cd QDAPI-Web-Bridge-v0.1.14-linux-amd64
+tar -xzf QDAPI-Web-Bridge-v0.1.15-linux-amd64.tar.gz
+cd QDAPI-Web-Bridge-v0.1.15-linux-amd64
 sha256sum -c SHA256SUMS
 ```
 
@@ -37,7 +37,7 @@ sudo bash deploy/install.sh "$PWD" https://qdapi.example.com
 
 | 位置 | 用途 |
 | --- | --- |
-| `/opt/qdapi/releases/v0.1.13/` | 程序版本 |
+| `/opt/qdapi/releases/v0.1.15/` | 程序版本 |
 | `/opt/qdapi/current` | 当前版本符号链接 |
 | `/opt/qdapi/data/qdapi.db` | SQLite及账号数据，qdapi可写 |
 | `/etc/qdapi/qdapi.env` | 域名、密钥、密码哈希及可选公众号配置，root:qdapi 0640 |
@@ -108,6 +108,8 @@ sudo certbot renew --dry-run
 - Web运行记录展开，核对七项+阅读积分各组结果；日读、周读800/1200、更新提醒、PK均应有资格日志。APP原日志分享入口应非空，待传日志只补传记录不重做任务。
 - 选择一个已手动上传的测试账号：APP可执行时确认云端让路；自然冻结后确认一次`app-offline`接管；重新打开APP后确认恢复租约，云端不再重复启动。不要通过强写生产租约或反复手动领奖伪造验收。
 - 已完成/冷却/未达标、免费次数0、非周日兑换均正常跳过。当前无资格时不能声称已经真实领取；要结合官方余额、标志及接口日志判断。
+- Web0.1.15的每小时广告按官方毫秒冷却期限单独补跑，原七项整点轮次不变。空闲且网络正常时，到期后通常数秒检查并执行；APP可执行或账号忙碌时继续让路，不能将这些保护状态冒称到期实领。每5秒只查本地期限，不是每5秒请求官方。
+- 展开“云端广告冷却到期”的日志，核对具体随机奖励、官方收益增加、冷却恢复和下次期限。仅有冷却变化或HTTP200不会报到账成功；收益统计+5可能对应订阅券，并不代表点币余额+5。APP本机引擎本轮未更新，不把云端验收套用到本机。
 - 登录失效应退出活动调度并清空失效凭据，**原微信绑定保留**；网络故障/验证码/402等不应直接移除。
 - `journalctl -u qdapi.service --since today`仅在私有服务器查看；分享前审查凭据、账号、IP、域名和原模块调试内容，不公开整库。
 

@@ -14,7 +14,7 @@ print(u.hostname)
 PY
 )
 test ! -e /etc/qdapi/qdapi.env || { echo '发现已有配置，拒绝覆盖；升级请按教程备份后进行'; exit 1; }
-test ! -e /opt/qdapi/releases/v0.1.13 || { echo '目标发行目录已存在，拒绝覆盖'; exit 1; }
+test ! -e /opt/qdapi/releases/v0.1.15 || { echo '目标发行目录已存在，拒绝覆盖'; exit 1; }
 (cd "$bundle" && sha256sum -c SHA256SUMS)
 read -r -s -p '请输入12～72字节管理员密码（不会显示）: ' password
 printf '\n'
@@ -25,13 +25,13 @@ hash=$(printf '%s' "$password" | "$bundle/qdapi-hashpassword")
 unset password repeated
 key=$(python3 -c 'import secrets,base64; print(base64.b64encode(secrets.token_bytes(32)).decode())')
 if ! id qdapi >/dev/null 2>&1; then useradd --system --home /opt/qdapi --shell /usr/sbin/nologin qdapi; fi
-install -d -m 755 /opt/qdapi/releases/v0.1.13
+install -d -m 755 /opt/qdapi/releases/v0.1.15
 install -d -m 700 -o qdapi -g qdapi /opt/qdapi/data
 install -d -m 750 -o root -g qdapi /etc/qdapi
-install -m 755 "$bundle/qdapi-web" /opt/qdapi/releases/v0.1.13/qdapi-web
-install -m 755 "$bundle/qdapi-hashpassword" /opt/qdapi/releases/v0.1.13/qdapi-hashpassword
+install -m 755 "$bundle/qdapi-web" /opt/qdapi/releases/v0.1.15/qdapi-web
+install -m 755 "$bundle/qdapi-hashpassword" /opt/qdapi/releases/v0.1.15/qdapi-hashpassword
 test ! -e /opt/qdapi/current || { echo 'current已存在，拒绝改动旧部署'; exit 1; }
-ln -s /opt/qdapi/releases/v0.1.13 /opt/qdapi/current
+ln -s /opt/qdapi/releases/v0.1.15 /opt/qdapi/current
 printf '%s\n' 'QDAPI_LISTEN=127.0.0.1:18080' "QDAPI_PUBLIC_URL=https://$domain" 'QDAPI_DATABASE=/opt/qdapi/data/qdapi.db' 'QDAPI_COOKIE_SECURE=true' "QDAPI_ENCRYPTION_KEY=$key" "QDAPI_ADMIN_PASSWORD_HASH=$hash" 'QDAPI_CLAIM_EARNED_BENEFITS=true' 'QDAPI_WECHAT_TOKEN=' 'QDAPI_WECHAT_APP_ID=' 'QDAPI_WECHAT_APP_SECRET=' 'QDAPI_WECHAT_TEMPLATE_ID=' > /etc/qdapi/qdapi.env
 unset key hash
 chown root:qdapi /etc/qdapi/qdapi.env
