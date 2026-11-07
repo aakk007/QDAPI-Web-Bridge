@@ -1,0 +1,13 @@
+name: Public source boundary
+on: [push, pull_request, workflow_dispatch]
+permissions:
+  contents: read
+jobs:
+  public-source:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+      - name: Verify public file boundaries
+        run: python3 scripts/check-publication.py
+      - name: Check shell scripts
+        run: bash -n deploy/install.sh

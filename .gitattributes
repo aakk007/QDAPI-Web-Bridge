@@ -1,0 +1,6 @@
+* text=auto eol=lf
+*.sh text eol=lf
+*.py text eol=lf
+*.md text eol=lf
+# 第三方许可保留原文，不改写其空白。
+**/assets/licenses/** -whitespace

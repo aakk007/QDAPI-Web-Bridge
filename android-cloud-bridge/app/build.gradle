@@ -1,0 +1,34 @@
+plugins { id 'com.android.application' }
+def cloudServer=providers.gradleProperty('cloudServer').getOrElse('')
+if (!cloudServer.isEmpty()) {
+    def address=new URI(cloudServer)
+    if (address.scheme!='https' || !address.host || address.userInfo || address.query || address.fragment || !(address.path in ['', '/'])) throw new GradleException('cloudServer必须为HTTPS站点根地址')
+    cloudServer=cloudServer.replaceAll('/+$','')
+}
+android {
+    namespace 'com.zxwn.qdapi.cloudbridge'
+    compileSdk 35
+    defaultConfig {
+        applicationId 'com.zxwn.qdapi.cloudbridge'
+        minSdk 26
+        targetSdk 35
+        versionCode 11
+        versionName '0.1.10'
+        testInstrumentationRunner 'com.zxwn.qdapi.cloudbridge.CloudClientDeviceTest'
+        buildConfigField 'String', 'QA_CERT_SHA256', '"' + providers.gradleProperty('qaCertSha256').getOrElse('') + '"'
+        buildConfigField 'String', 'CLOUD_SERVER', '"' + cloudServer + '"'
+    }
+    buildTypes {
+        debug {
+            buildConfigField 'String', 'CLOUD_SERVER', '"' + providers.gradleProperty('qaServer').getOrElse(cloudServer) + '"'
+        }
+    }
+    compileOptions { sourceCompatibility JavaVersion.VERSION_1_8; targetCompatibility JavaVersion.VERSION_1_8 }
+    buildFeatures { buildConfig true }
+    packaging { jniLibs { useLegacyPackaging true } }
+}
+tasks.withType(JavaCompile).configureEach { options.encoding = 'UTF-8' }
+tasks.named('preBuild').configure { doFirst {
+    if (!file('src/main/jniLibs/arm64-v8a/libqdapi_engine.so').isFile()) throw new GradleException('请先按README准备Release中的arm64本机引擎组件')
+} }
+dependencies { compileOnly 'de.robv.android.xposed:api:82' }
