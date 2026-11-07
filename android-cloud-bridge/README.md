@@ -1,6 +1,6 @@
 # 独立桥接APP构建与使用
 
-桥接版本0.1.10（versionCode11），当前提供arm64-v8a。原模块为xihan123的[QDReadHook](https://github.com/Xposed-Modules-Repo/cn.xihan.qdds)，需用户自行从原项目安装并启用，本仓库不打包原模块或起点APP。
+桥接版本0.1.11（versionCode12），当前提供arm64-v8a。原模块为xihan123的[QDReadHook](https://github.com/Xposed-Modules-Repo/cn.xihan.qdds)，需用户自行从原项目安装并启用，本仓库不打包原模块或起点APP。
 
 ## 直接使用公共APK
 

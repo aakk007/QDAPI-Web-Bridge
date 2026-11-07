@@ -14,12 +14,12 @@ mkdir -m 700 qdapi-release
 cd qdapi-release
 ```
 
-从本仓库Releases下载`QDAPI-Web-Bridge-v0.1.13-linux-amd64.tar.gz`和外层`SHA256SUMS.txt`。不要从聊天附件或未知镜像获取。对照GitHub发布页/可信渠道的摘要后校验：
+从本仓库Releases下载`QDAPI-Web-Bridge-v0.1.14-linux-amd64.tar.gz`和外层`SHA256SUMS.txt`。本轮Web核心仍为0.1.13，仅桥接与来源文档更新。不要从聊天附件或未知镜像获取。对照GitHub发布页/可信渠道的摘要后校验：
 
 ```bash
 sha256sum --ignore-missing -c SHA256SUMS.txt
-tar -xzf QDAPI-Web-Bridge-v0.1.13-linux-amd64.tar.gz
-cd QDAPI-Web-Bridge-v0.1.13-linux-amd64
+tar -xzf QDAPI-Web-Bridge-v0.1.14-linux-amd64.tar.gz
+cd QDAPI-Web-Bridge-v0.1.14-linux-amd64
 sha256sum -c SHA256SUMS
 ```
 

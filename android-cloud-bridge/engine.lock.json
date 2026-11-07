@@ -1,7 +1,7 @@
 {
-  "release": "v0.1.13",
+  "release": "v0.1.14",
   "asset": "libqdapi_engine-arm64-v8a.so",
-  "url": "https://github.com/aakk007/QDAPI-Web-Bridge/releases/download/v0.1.13/libqdapi_engine-arm64-v8a.so",
+  "url": "https://github.com/aakk007/QDAPI-Web-Bridge/releases/download/v0.1.14/libqdapi_engine-arm64-v8a.so",
   "sha256": "49f3e28a93385e2d6dadd45e33bbf1517e623b8690244dc28fefffd7f0c1c2e4",
   "licenseScope": "Go core binary only; not covered by repository MIT; see LICENSE-SCOPE.md"
 }

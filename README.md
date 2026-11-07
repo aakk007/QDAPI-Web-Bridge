@@ -6,7 +6,7 @@
 
 | 组成 | 原作者与地址 | 本仓库范围 |
 | --- | --- | --- |
-| Go任务基础（Web及本机引擎基于其实现） | [吾爱破解-pzx521521](https://www.52pojie.cn/?771356)，[原项目地址](https://github.com/pzx521521/qdapi)（目前可能不可访问） | 维护者声明持有私下授权；**所有Go源码不公开**，不上传原项目本地目录及私下交流材料。核心仅作为本项目发布组件提供，不向第三方转授原Go源码权利 |
+| Go任务基础（Web及本机引擎基于其实现） | [吾爱破解-pzx521521](https://www.52pojie.cn/home.php?mod=space&uid=771356)，[原项目地址](https://github.com/pzx521521/qdapi)（目前可能不可访问） | 维护者声明持有私下授权；**所有Go源码不公开**，不上传原项目本地目录及私下交流材料。核心仅作为本项目发布组件提供，不向第三方转授原Go源码权利 |
 | APP原模块QDReadHook | **xihan123**，[原项目/官方下载](https://github.com/Xposed-Modules-Repo/cn.xihan.qdds) | 保留原作者和来源；原README声明GPL-3.0，以对应版本原许可为准。本仓库不包含、改签或再分发其APK/源码 |
 | 新增独立Android桥接及文档/部署脚本 | aakk007，ChatGPT/Codex辅助集成 | 公开部分按[MIT](LICENSE)许可，范围见[许可边界](LICENSE-SCOPE.md) |
 
@@ -14,7 +14,7 @@
 
 ## 当前发布
 
-- 发行版：`v0.1.13`；Web核心`0.1.13`、独立桥接APP`0.1.10`（versionCode11）。
+- 发行版：`v0.1.14`；Web核心`0.1.13`（本轮未改）、独立桥接APP`0.1.11`（versionCode12）。
 - [Releases下载](https://github.com/aakk007/QDAPI-Web-Bridge/releases)：Linux amd64全量部署包、arm64 Android桥接APK及SHA256清单。
 - 不含起点官方APP、QDReadHook APK、原Go源码、用户账号、真实服务器地址、令牌、密钥、数据库或历史运行日志。
 - 公共APK不预设维护者云端；本机七项可独立执行。自建云端后须按[APP构建说明](android-cloud-bridge/README.md)用自己的HTTPS域名构建，不能把账号传给未知服务。

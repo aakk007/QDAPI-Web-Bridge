@@ -17,6 +17,7 @@ public final class CloudClientDeviceTest extends Instrumentation {
     private Bundle arguments;
     @Override public void onCreate(Bundle arguments){super.onCreate(arguments);this.arguments=arguments;start();}
     @Override public void onStart(){
+        if(arguments!=null && arguments.containsKey("projectCreditsLinkTest")){ProjectCreditsDeviceTest.runLinksOnly(this);return;}
         if(arguments!=null && arguments.containsKey("projectCreditsTest")){ProjectCreditsDeviceTest.run(this);return;}
         if(arguments!=null && arguments.containsKey("coldStartConfigurationTest")){ColdStartConfigurationDeviceTest.run(this);return;}
         if(arguments!=null && arguments.containsKey("durableLogTest")){DurableLogDeviceTest.run(this,arguments);return;}
