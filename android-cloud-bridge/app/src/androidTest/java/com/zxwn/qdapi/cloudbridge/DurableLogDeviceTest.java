@@ -37,6 +37,7 @@ final class DurableLogDeviceTest {
             LocalEngineRunner engine=new LocalEngineRunner(test.getTargetContext(),job->{
                 requests[0]++;String path=new java.net.URL(job.getString("url")).getPath(),data="{}";
                 if(path.endsWith("mainPage"))data="{}";
+                else if(path.endsWith("getweekcheckininfo"))data="{\"IsStrategy202205\":1}";
                 else if(path.endsWith("getcurrentweekcheckininfo"))data="{\"IsSunday\":0,\"LotteryInfo\":{\"LotteryCount\":0,\"HasVideoUrge\":0}}";
                 else if(path.endsWith("checkinexchangepage"))data="{\"Balance\":7,\"Goods\":[]}";
                 else if(path.endsWith("readpage"))data="{\"ReadInfo\":{\"ReadScore\":100},\"TodayRead\":{\"TotalReadTime\":0,\"RewardList\":[]},\"WeekRead\":{\"TotalReadTime\":0,\"RewardList\":[{\"PackageId\":10,\"Time\":48000,\"ScoreAmount\":500,\"HasPickUp\":0},{\"PackageId\":11,\"Time\":72000,\"ScoreAmount\":1000,\"HasPickUp\":0}]},\"TaskModule\":{\"TaskList\":[{\"TaskId\":100000000062,\"Type\":8004,\"Status\":0,\"Reward\":200}]},\"ReadPK\":{\"PKStatus\":1,\"WinScore\":0}}";

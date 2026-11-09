@@ -1,7 +1,7 @@
 {
-  "release": "v0.1.15",
+  "release": "v0.1.16",
   "asset": "libqdapi_engine-arm64-v8a.so",
-  "url": "https://github.com/aakk007/QDAPI-Web-Bridge/releases/download/v0.1.15/libqdapi_engine-arm64-v8a.so",
-  "sha256": "49f3e28a93385e2d6dadd45e33bbf1517e623b8690244dc28fefffd7f0c1c2e4",
+  "url": "https://github.com/aakk007/QDAPI-Web-Bridge/releases/download/v0.1.16/libqdapi_engine-arm64-v8a.so",
+  "sha256": "f0707350ff5960272ed9d908765ea2fb593a73f25dc9be1627271355ac4e946d",
   "licenseScope": "Go core binary only; not covered by repository MIT; see LICENSE-SCOPE.md"
 }

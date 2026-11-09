@@ -32,6 +32,7 @@ final class CloudSettings {
         try{
             Class<?> screen=Class.forName("cn.xihan.qdds.activity.ModuleSettingActivity",false,loader);
             if(!screen.isInstance(activity))return;
+            SilentRewardAd.tryModule(loader);
             Class<?> factory=Class.forName("x.sa3",false,loader);
             Method build=null;
             for(Method method:factory.getDeclaredMethods()){
@@ -80,7 +81,7 @@ final class CloudSettings {
                 toggle(loader,"daily-rewards","每日任务","本机免广告执行每日任务，领取后回读核验"),
                 toggle(loader,"video-rewards","视频任务","本机免广告执行视频任务，领取后回读核验"),
                 toggle(loader,"game-rewards","游戏任务","自动执行游戏进度任务，达标后领取并回读"),
-                toggle(loader,"checkin","自动签到","检查今日签到状态，未签到时自动签到"),
+                toggle(loader,"checkin","自动签到","已签到也检查后续奖励；有资格时本机补领并核验，免费抽奖按独立开关执行"),
                 toggle(loader,"exchange","自动兑换章节卡","周日开放且碎片足够时兑换，回读扣减及兑换记录"),
                 toggle(loader,"lottery","免费抽奖","完成官方免广告加次后自动抽奖，回读次数与奖品，不打开结果弹窗"))),
             construct(loader,"x.u93","额外可选任务",Collections.singletonList(

@@ -38,6 +38,7 @@ final class LocalEngineDeviceTest {
                     if(!actions.add(path+id))throw new Exception("本机引擎重复提交");
                     if(path.endsWith("finishWatch"))done.put(id,1);else received.put(id,1);
                 }else if(path.endsWith("heartbeat")){beats[0]++;return new JSONObject().put("status",200).put("body","{\"code\":0,\"data\":{}}");}
+                else if(path.endsWith("getweekcheckininfo"))data="{\"IsStrategy202205\":1}";
                 else if(path.endsWith("getcurrentweekcheckininfo"))data="{\"IsSunday\":0,\"LotteryInfo\":{\"LotteryCount\":0}}";
                 else if(path.endsWith("checkinexchangepage"))data="{\"Balance\":0,\"Goods\":[]}";
                 else if(!path.endsWith("/checkin/checkin"))throw new Exception("本机合成任务出现未知接口");

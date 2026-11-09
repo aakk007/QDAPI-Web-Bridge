@@ -14,7 +14,7 @@ mkdir -m 700 qdapi-release
 cd qdapi-release
 ```
 
-从本仓库Releases下载`QDAPI-Web-Bridge-v0.1.15-linux-amd64.tar.gz`和外层`SHA256SUMS.txt`。本轮Web核心为0.1.15，修复每小时广告冷却调度与随机奖励核验；APP0.1.11及arm64引擎未改变。不要从聊天附件或未知镜像获取。对照GitHub发布页/可信渠道的摘要后校验：
+Web部署包仍从[`v0.1.15`](https://github.com/aakk007/QDAPI-Web-Bridge/releases/tag/v0.1.15)下载`QDAPI-Web-Bridge-v0.1.15-linux-amd64.tar.gz`及其`SHA256SUMS.txt`。Web核心为0.1.15，v0.1.16没有替换该包。桥接APP0.1.12和对应arm64引擎从[`v0.1.16`](https://github.com/aakk007/QDAPI-Web-Bridge/releases/tag/v0.1.16)单独下载并核对摘要。不要从聊天附件或未知镜像获取。对照GitHub发布页/可信渠道的摘要后校验：
 
 ```bash
 sha256sum --ignore-missing -c SHA256SUMS.txt

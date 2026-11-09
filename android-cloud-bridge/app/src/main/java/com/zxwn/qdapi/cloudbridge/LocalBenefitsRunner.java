@@ -55,11 +55,13 @@ final class LocalBenefitsRunner {
         boolean game="lygame.qidian.com".equals(url.getHost()) && "/home/log/heartbeat".equals(path) && "gameId=201743&platformId=1".equals(url.getQuery()) && "GET".equals(method);
         if(!game && !"h5.if.qidian.com".equals(url.getHost()))throw new Exception("本机福利请求地址无效");
         Set<String> get=new HashSet<>(Arrays.asList(
+            "/argus/api/v2/checkin/getweekcheckininfo",
             "/argus/api/v2/video/adv/mainPage",
             "/argus/api/v3/checkin/getcurrentweekcheckininfo","/argus/api/v3/checkin/checkinexchangepage","/argus/api/v3/checkin/checkinexchangelog",
             "/argus/api/v1/common/risk/check","/argus/api/v2/readtime/readpage","/argus/api/v1/readtime/score/pickup/risk",
             "/argus/api/v1/readtime/daymission/pickup/risk","/argus/api/v1/readtime/pk/reward/pickup/risk"));
         Set<String> post=new HashSet<>(Arrays.asList(
+            "/argus/api/v2/checkin/adreport",
             "/argus/api/v1/video/adv/receiveTaskReward","/argus/api/v1/video/adv/finishWatch","/argus/api/v2/video/callback",
             "/argus/api/v3/checkin/checkin","/argus/api/v3/checkin/exchangegoods","/argus/api/v2/checkin/lottery","/argus/api/v1/readtime/score/batchPickup/risk"));
         if(!(game || "GET".equals(method)&&get.contains(path) || "POST".equals(method)&&post.contains(path)))throw new Exception("本机福利请求不在允许范围内");

@@ -21,6 +21,7 @@ public final class CloudHook implements IXposedHookLoadPackage {
 
     @Override public void handleLoadPackage(XC_LoadPackage.LoadPackageParam param) {
         if(!TARGET.equals(param.packageName))return;
+        SilentRewardAd.watchModule(param.classLoader);
         XposedHelpers.findAndHookMethod(Application.class,"attach",Context.class,new XC_MethodHook(){
             @Override protected void afterHookedMethod(MethodHookParam hook){
                 synchronized(CloudHook.class){if(attached)return;attached=true;}
@@ -29,14 +30,16 @@ public final class CloudHook implements IXposedHookLoadPackage {
                 configuration=LocalAccountConfiguration.forHost(app.getClassLoader(),app);runtimeLog=new TaskRuntimeLog(app);
                 panel=new CloudPanel(app);
                 panel.enableLocalExecution(true);
+                CheckInRewardAd.install(app.getClassLoader());
                 app.registerActivityLifecycleCallbacks(new Application.ActivityLifecycleCallbacks(){
-                    public void onActivityResumed(Activity activity){CloudSettings.install(activity);panel.rememberActivity(activity);}
-                    public void onActivityCreated(Activity a,Bundle b){CloudSettings.install(a);}
+                    public void onActivityPreCreated(Activity a,Bundle b){SilentRewardAd.created(a);}
+                    public void onActivityResumed(Activity activity){SilentRewardAd.created(activity);CheckInRewardAd.resumed(activity);CloudSettings.install(activity);panel.rememberActivity(activity);}
+                    public void onActivityCreated(Activity a,Bundle b){SilentRewardAd.created(a);CloudSettings.install(a);}
                     public void onActivityStarted(Activity a){}
-                    public void onActivityPaused(Activity a){}
+                    public void onActivityPaused(Activity a){SilentRewardAd.paused(a);CheckInRewardAd.paused(a);}
                     public void onActivityStopped(Activity a){}
                     public void onActivitySaveInstanceState(Activity a,Bundle b){}
-                    public void onActivityDestroyed(Activity a){}
+                    public void onActivityDestroyed(Activity a){SilentRewardAd.paused(a);}
                 });
             }
         });

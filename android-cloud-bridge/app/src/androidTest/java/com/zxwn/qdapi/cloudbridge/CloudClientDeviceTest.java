@@ -17,6 +17,7 @@ public final class CloudClientDeviceTest extends Instrumentation {
     private Bundle arguments;
     @Override public void onCreate(Bundle arguments){super.onCreate(arguments);this.arguments=arguments;start();}
     @Override public void onStart(){
+        if(arguments!=null && arguments.containsKey("rewardAdTest")){RewardAdDeviceTest.run(this);return;}
         if(arguments!=null && arguments.containsKey("projectCreditsLinkTest")){ProjectCreditsDeviceTest.runLinksOnly(this);return;}
         if(arguments!=null && arguments.containsKey("projectCreditsTest")){ProjectCreditsDeviceTest.run(this);return;}
         if(arguments!=null && arguments.containsKey("coldStartConfigurationTest")){ColdStartConfigurationDeviceTest.run(this);return;}
@@ -111,6 +112,7 @@ public final class CloudClientDeviceTest extends Instrumentation {
             String data;
             if(path.endsWith("/video/adv/mainPage"))data="{\"NickName\":\"设备回归账号\"}";
             else if(path.endsWith("/checkin/checkin"))data="{}";
+            else if(path.endsWith("/getweekcheckininfo"))data="{\"IsStrategy202205\":1}";
             else if(path.endsWith("/getcurrentweekcheckininfo"))data="{\"IsSunday\":0,\"LotteryInfo\":{\"LotteryCount\":0}}";
             else if(path.endsWith("/readtime/readpage"))data="{\"ReadInfo\":{\"ReadScore\":100}}";
             else throw new Exception("按钮回归调用了范围外接口");
@@ -230,7 +232,8 @@ public final class CloudClientDeviceTest extends Instrumentation {
                 String id=java.net.URLDecoder.decode(job.getString("body").split("taskId=")[1].split("&")[0],"UTF-8");
                 String key=path+id;if(!actions.add(key))throw new Exception("自动任务重复提交");
                 if(path.endsWith("finishWatch"))finished.put(id,1);else received.put(id,1);
-            } else if(path.endsWith("getcurrentweekcheckininfo"))data="{\"IsSunday\":0,\"LotteryInfo\":{\"LotteryCount\":0}}";
+            } else if(path.endsWith("getweekcheckininfo"))data="{\"IsStrategy202205\":1}";
+            else if(path.endsWith("getcurrentweekcheckininfo"))data="{\"IsSunday\":0,\"LotteryInfo\":{\"LotteryCount\":0}}";
             else if(!path.endsWith("/checkin/checkin"))throw new Exception("自动任务未知接口");
             return new JSONObject().put("status",200).put("body","{\"Result\":0,\"Data\":"+data+"}");
         },new TaskRuntimeLog((priority,tag,message)->logs.add(message)));
